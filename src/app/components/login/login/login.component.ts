@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from '../../../shared/services/login/login.service';
 
@@ -7,9 +7,16 @@ import { LoginService } from '../../../shared/services/login/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  constructor(public loginService: LoginService, public fb: FormBuilder) {}
-  private loginFormGroup: FormGroup;
+export class LoginComponent implements OnInit, OnDestroy {
+  public loginFormGroup: FormGroup;
+  constructor(public loginService: LoginService, public fb: FormBuilder) {
+    this.loginFormGroup = this.fb.group({
+      loginId: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+  }
+  ngOnDestroy(): void {
+  };
 
   ngOnInit(): void {
     this.loginFormGroup = this.fb.group({

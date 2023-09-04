@@ -4,13 +4,14 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { loginRouter } from './login/login.routing';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     LoginComponent
   ],
   imports: [
-    CommonModule, loginRouter, HttpClientModule
+    CommonModule, loginRouter, HttpClientModule, FormsModule, ReactiveFormsModule, RouterModule
   ]
 })
 

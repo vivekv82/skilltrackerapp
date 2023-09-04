@@ -10,6 +10,7 @@ export class LoginService {
   constructor(public authHttpService: AuthHttpService) { }
 
   public submit() {
+    console.log("LoginService called");
     this.authHttpService.get('http://localhost:8080/api/v1/engineer/fetchProfile/100').subscribe((res)=> {
       console.log("api/v1/engineer/fetchProfile/100 = " + JSON.stringify(res));
     });
