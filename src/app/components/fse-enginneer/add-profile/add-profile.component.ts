@@ -34,8 +34,11 @@ export class AddProfileComponent implements OnInit, OnDestroy {
   };
 
   onSubmit() {
-    let userid = this.addProfileFormGroup.get('loginId');
-    let password = this.addProfileFormGroup.get('password');
+    let lastName = this.addProfileFormGroup.get('lastName');
+    let firstName = this.addProfileFormGroup.get('firstName');
+    let associateId = this.addProfileFormGroup.get('associateId');
+    let mobile = this.addProfileFormGroup.get('mobile');
+    let email = this.addProfileFormGroup.get('email');
 
     //this.loginService.submit();
     //this.router.navigate(['admin']);
