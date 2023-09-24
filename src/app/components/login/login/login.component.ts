@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from '../../../shared/services/login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { LoginService } from '../../../shared/services/login/login.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public loginFormGroup: FormGroup;
-  constructor(public loginService: LoginService, public fb: FormBuilder) {
+  constructor(public loginService: LoginService, public fb: FormBuilder, public router: Router) {
     this.loginFormGroup = this.fb.group({
       loginId: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -28,6 +29,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     let userid = this.loginFormGroup.get('loginId');
     let password = this.loginFormGroup.get('password');
-    this.loginService.submit();
+
+    //this.loginService.submit();
+    //this.router.navigate(['admin']);
+    this.router.navigate(['fse/addProfile']);
   }
 }

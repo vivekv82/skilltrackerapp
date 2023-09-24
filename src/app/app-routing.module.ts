@@ -1,6 +1,8 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login/login.component';
+import { AdminoperationsComponent } from './components/admin/adminoperations/adminoperations.component';
+import { AddProfileComponent } from './components/fse-enginneer/add-profile/add-profile.component';
 
 const routes: Routes = [];
 
@@ -19,6 +21,16 @@ export const router: Routes = [
     path: 'login',
     component: LoginComponent,
     loadChildren: () => import('./components/login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'admin',
+    component: AdminoperationsComponent,
+    loadChildren: () => import('./components/admin/admin.module').then((m) => m.AdminModule)
+  },
+  {
+    path:'fse',
+    component: AddProfileComponent,
+    loadChildren: () => import('./components/fse-enginneer/fse-enginneer.module').then((m) => m.FseEnginneerModule)
   }
 ];
 

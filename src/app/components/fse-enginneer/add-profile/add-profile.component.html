@@ -1,0 +1,12 @@
+<div>
+  <form novalidate [formGroup]="addProfileFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div><input type="text" name="firstName" /></div>
+    <div><input type="text" name="lastName" /></div>
+    <div><input type="text" name="associateId" /></div>
+    <div><input type="text" name="mobile" /></div>
+    <div><input type="text" name="email" /></div>
+
+    <div><button type="submit">Add Profile</button></div>
+  </form>
+</div>
+
