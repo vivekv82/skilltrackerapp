@@ -2,23 +2,23 @@
   <form novalidate [formGroup]="updateProfileFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
     <div class="mt-20">
       <div class="label-margin">First Name </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" name="firstName" /></div>
+      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="firstName" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">Last Name </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" name="lastName" /></div>
+      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="lastName" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">Associate Id </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" name="associateId" /></div>
+      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="associateId" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">Mobile </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" name="mobile" /></div>
+      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="mobile" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">Email </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" name="email" /></div>
+      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="email" /></div>
     </div>
 
 
@@ -28,43 +28,43 @@
 
     <div class="mt-20 mb-20">
       <div class="label-margin">HTML-CSS-JAVASCRIPT </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="htmlcssjs" name="htmlcssjs" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="htmlcssjs" formControlName="htmlcssjs" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">ANGULAR </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="angular" name="angular" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="angular" formControlName="angular" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">REACT </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" name="react" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="react" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">SPRING </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" name="spring" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="spring" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">RESTFUL </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" name="restful" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="restful" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">HIBERNATE </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" name="hibernate" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="hibernate" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">GIT </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" name="git" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="git" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">DOCKER </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" name="docker" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="docker" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">JENKINS </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" name="jenkins" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="jenkins" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">AWS </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" name="aws" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="aws" /></div>
     </div>
 
 
@@ -73,19 +73,17 @@
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">SPOKEN </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="htmlcssjs" name="spoken" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="htmlcssjs" formControlName="spoken" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">COMMUNICATION </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="angular" name="communication" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="angular" formControlName="communication" /></div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">APTITUDE </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" name="aptitude" /></div>
+      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="aptitude" /></div>
     </div>
 
-    <div class="mt-20 mb-20"><button class="mb-20 button-submit" type="submit">Update Profile</button></div>
-
-    <div class="mt-20 mb-20"><button class="mb-20 button-submit" type="submit">Add Profile</button></div>
+    <div class="mt-20 mb-20"><button class="mb-20 button-submit" type="submit">Update Profile!!!!</button></div>
   </form>
 </div>

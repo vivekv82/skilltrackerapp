@@ -3,6 +3,11 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from '../../../shared/services/login/login.service';
 import { Router } from '@angular/router';
 
+enum FormControlName {
+  USER_ID = 'loginId',
+  PASSWORD = 'password',
+}
+type LoginFormValue = { [key in FormControlName]: string };
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,6 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     let userid = this.loginFormGroup.get('loginId');
     let password = this.loginFormGroup.get('password');
+    const loginData = this.loginFormGroup.value as LoginFormValue;
 
     //this.loginService.submit();
     //this.router.navigate(['admin']);

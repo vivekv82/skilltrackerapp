@@ -3,6 +3,28 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../../shared/services/profile/profile.service';
 
+enum FormControlName {
+  LAST_NAME = "lastName",
+  FIRST_NAME = "firstName",
+  ASSOCIATE_ID = "associateId",
+  MOBILE = "mobile",
+  EMAIL = "email",
+  HTMLCSSJS = "htmlcssjs",
+  ANGULAR = "angular",
+  REACT = "react",
+  SPRING = "spring",
+  RESTFUL = "restful",
+  HIBERNATE = "hibernate",
+  GIT = "git",
+  DOCKER = "docker",
+  JENKINS = "jenkins",
+  AWS = "aws",
+  SPOKEN = "spoken",
+  COMMUNICATION = "communication",
+  APPTITUEDE = "aptitude"
+};
+type addProfileValue = { [key in FormControlName]: string };
+
 @Component({
   selector: 'app-add-profile',
   templateUrl: './add-profile.component.html',
@@ -37,51 +59,31 @@ export class AddProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.addProfileFormGroup = this.fb.group({
-      lastName: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      associateId: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-
-      htmlcssjs: ['', [Validators.required,]],
-      angular: ['', [Validators.required]],
-      react: ['', [Validators.required]],
-      spring: ['', [Validators.required]],
-      restful: ['', [Validators.required]],
-      hibernate: ['', [Validators.required]],
-      git: ['', [Validators.required]],
-      docker: ['', [Validators.required]],
-      jenkins: ['', [Validators.required]],
-      aws: ['', [Validators.required]],
-      spoken: ['', [Validators.required]],
-      communication: ['', [Validators.required]],
-      aptitude: ['', [Validators.required]],
-    });
   }
   ngOnDestroy(): void {
   };
 
   onSubmit() {
-    let lastName = this.addProfileFormGroup.get('lastName');
-    let firstName = this.addProfileFormGroup.get('firstName');
-    let associateId = this.addProfileFormGroup.get('associateId');
-    let mobile = this.addProfileFormGroup.get('mobile');
-    let email = this.addProfileFormGroup.get('email');
+    const addProfile = this.addProfileFormGroup.value as addProfileValue;
+    let lastName = addProfile.lastName;
+    let firstName = addProfile.firstName;
+    let associateId = addProfile.associateId;
+    let mobile = addProfile.mobile;
+    let email = addProfile.email;
 
-    let htmlcssjs = this.addProfileFormGroup.get('htmlcssjs');
-    let angular = this.addProfileFormGroup.get('angular');
-    let react = this.addProfileFormGroup.get('react');
-    let spring = this.addProfileFormGroup.get('spring');
-    let restful = this.addProfileFormGroup.get('restful');
-    let hibernate = this.addProfileFormGroup.get('hibernate');
-    let git = this.addProfileFormGroup.get('git');
-    let docker = this.addProfileFormGroup.get('docker');
-    let jenkins = this.addProfileFormGroup.get('jenkins');
-    let aws = this.addProfileFormGroup.get('aws');
-    let spoken = this.addProfileFormGroup.get('spoken');
-    let communication = this.addProfileFormGroup.get('communication');
-    let aptitude = this.addProfileFormGroup.get('aptitude');
+    let htmlcssjs = addProfile.htmlcssjs;
+    let angular = addProfile.angular;
+    let react = addProfile.react;
+    let spring = addProfile.spring;
+    let restful = addProfile.restful;
+    let hibernate = addProfile.hibernate;
+    let git = addProfile.git;
+    let docker = addProfile.docker;
+    let jenkins = addProfile.jenkins;
+    let aws = addProfile.aws;
+    let spoken = addProfile.spoken;
+    let communication = addProfile.communication;
+    let aptitude = addProfile.aptitude;
 
     let addSkillReq = {
       "lastName": lastName,
@@ -150,7 +152,7 @@ export class AddProfileComponent implements OnInit, OnDestroy {
 
     this.profileService.addNewProfile(addSkillReq);
     //this.router.navigate(['admin']);
-    this.router.navigate(['fse/addProfile']);
+    //this.router.navigate(['fse/addProfile']);
   }
 
 }

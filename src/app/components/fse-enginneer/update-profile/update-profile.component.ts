@@ -3,6 +3,27 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../../shared/services/profile/profile.service';
 
+enum FormControlName {
+  LAST_NAME = "lastName",
+  FIRST_NAME = "firstName",
+  ASSOCIATE_ID = "associateId",
+  MOBILE = "mobile",
+  EMAIL = "email",
+  HTMLCSSJS = "htmlcssjs",
+  ANGULAR = "angular",
+  REACT = "react",
+  SPRING = "spring",
+  RESTFUL = "restful",
+  HIBERNATE = "hibernate",
+  GIT = "git",
+  DOCKER = "docker",
+  JENKINS = "jenkins",
+  AWS = "aws",
+  SPOKEN = "spoken",
+  COMMUNICATION = "communication",
+  APPTITUEDE = "aptitude"
+};
+type updateProfileValue = { [key in FormControlName]: string };
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.component.html',
@@ -37,51 +58,31 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.updateProfileFormGroup = this.fb.group({
-      lastName: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      associateId: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      
-      htmlcssjs: ['', [Validators.required,]],
-      angular: ['', [Validators.required]],
-      react: ['', [Validators.required]],
-      spring: ['', [Validators.required]],
-      restful: ['', [Validators.required]],
-      hibernate: ['', [Validators.required]],
-      git: ['', [Validators.required]],
-      docker: ['', [Validators.required]],
-      jenkins: ['', [Validators.required]],
-      aws: ['', [Validators.required]],
-      spoken: ['', [Validators.required]],
-      communication: ['', [Validators.required]],
-      aptitude: ['', [Validators.required]],
-    });
   }
   ngOnDestroy(): void {
   };
 
   onSubmit() {
-    let lastName = this.updateProfileFormGroup.get('lastName');
-    let firstName = this.updateProfileFormGroup.get('firstName');
-    let associateId = this.updateProfileFormGroup.get('associateId');
-    let mobile = this.updateProfileFormGroup.get('mobile');
-    let email = this.updateProfileFormGroup.get('email');
+    const updateProfile = this.updateProfileFormGroup.value as updateProfileValue;
+    let lastName = updateProfile.lastName;
+    let firstName = updateProfile.firstName;
+    let associateId = updateProfile.associateId;
+    let mobile = updateProfile.mobile;
+    let email = updateProfile.email;
 
-    let htmlcssjs = this.updateProfileFormGroup.get('htmlcssjs');
-    let angular = this.updateProfileFormGroup.get('angular');
-    let react = this.updateProfileFormGroup.get('react');
-    let spring = this.updateProfileFormGroup.get('spring');
-    let restful = this.updateProfileFormGroup.get('restful');
-    let hibernate = this.updateProfileFormGroup.get('hibernate');
-    let git = this.updateProfileFormGroup.get('git');
-    let docker = this.updateProfileFormGroup.get('docker');
-    let jenkins = this.updateProfileFormGroup.get('jenkins');
-    let aws = this.updateProfileFormGroup.get('aws');
-    let spoken = this.updateProfileFormGroup.get('spoken');
-    let communication = this.updateProfileFormGroup.get('communication');
-    let aptitude = this.updateProfileFormGroup.get('aptitude');
+    let htmlcssjs = updateProfile.htmlcssjs;
+    let angular = updateProfile.angular;
+    let react = updateProfile.react;
+    let spring = updateProfile.spring;
+    let restful = updateProfile.restful;
+    let hibernate = updateProfile.hibernate;
+    let git = updateProfile.git;
+    let docker = updateProfile.docker;
+    let jenkins = updateProfile.jenkins;
+    let aws = updateProfile.aws;
+    let spoken = updateProfile.spoken;
+    let communication = updateProfile.communication;
+    let aptitude = updateProfile.aptitude;
 
     let updateSkillReq = {
       "lastName": lastName,
