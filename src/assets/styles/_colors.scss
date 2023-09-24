@@ -1,0 +1,106 @@
+$skills-orange: #fc5c3b;
+$skills-light-blue: #2574bb;
+$skills-blue: #0d4877;
+$skills-dark-blue: #043167;
+$headings-dark-color: #043167;
+
+@mixin DMSans($weight) {
+  font-family: 'DM Sans', sans-serif !important;
+  @if $weight == bold {
+    font-weight: 700 !important;
+  }
+  @if $weight == medium {
+    font-weight: 500 !important;
+  }
+  @if $weight == regular {
+    font-weight: 400 !important;
+  }
+  @if $weight == normal {
+    font-weight: 400 !important;
+  }
+  @if $weight == light {
+    font-weight: 300 !important;
+  }
+  @if $weight == thin {
+    font-weight: 100 !important;
+  }
+}
+
+@mixin Roboto($weight) {
+  font-family: Roboto, serif !important;
+  @if $weight==bold {
+    font-weight: 700 !important;
+  }
+  @if $weight==medium {
+    font-weight: 500 !important;
+  }
+  @if $weight==regular {
+    font-weight: 400 !important;
+  }
+  @if $weight==normal {
+    font-weight: 400 !important;
+  }
+  @if $weight==light {
+    font-weight: 300 !important;
+  }
+  @if $weight==thin {
+    font-weight: 100 !important;
+  }
+}
+
+@mixin FontAwesome5Free($weight) {
+  @if $weight==light {
+    font-family: FontAwesome5FreeLight !important;
+  }
+  @if $weight==regular {
+    font-family: FontAwesome5FreeRegular !important;
+  }
+  @if $weight==solid {
+    font-family: FontAwesome5FreeSolid !important;
+  }
+}
+
+h1,
+.header-h1 {
+  @include Roboto(light);
+  font-size: 24px !important;
+  color: $skills-orange !important;
+  line-height: 32px;
+  margin-bottom: 10px;
+}
+
+h2,
+.header-h2 {
+  @include Roboto(medium);
+  font-size: 22px !important;
+  color: $skills-orange !important;
+  line-height: 25px;
+}
+
+h3,
+.header-h3 {
+  @include Roboto(regular);
+  font-size: 20px !important;
+}
+
+h5,
+.header-h5 {
+  @include Roboto(light);
+  font-size: 18px !important;
+}
+
+h6,
+.header-h6 {
+  @include Roboto(bold);
+  font-size: 16px !important;
+}
+
+.normal-text {
+  @include Roboto(regular);
+  font-size: 16px !important;
+}
+
+.footer-text {
+  @include Roboto(regular);
+  font-size: 14px !important;
+}
