@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login/login.component';
 import { AdminoperationsComponent } from './components/admin/adminoperations/adminoperations.component';
 import { AddProfileComponent } from './components/fse-enginneer/add-profile/add-profile.component';
+import { CommonLayoutComponent } from './shared/layouts/common-layout/common-layout.component';
 
 const routes: Routes = [];
 
@@ -29,7 +30,7 @@ export const router: Routes = [
   },
   {
     path:'fse',
-    component: AddProfileComponent,
+    component: CommonLayoutComponent,
     loadChildren: () => import('./components/fse-enginneer/fse-enginneer.module').then((m) => m.FseEnginneerModule)
   }
 ];

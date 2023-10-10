@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const loginData = this.loginFormGroup.value as LoginFormValue;
 
     //this.loginService.submit();
-    //this.router.navigate(['admin']);
-    this.router.navigate(['fse/addProfile']);
+    this.router.navigate(['admin']);
+    //this.router.navigate(['fse/addProfile']);
   }
 }

@@ -43,9 +43,9 @@ export class LoginService {
           }
       ]
   };
-    this.authHttpService.post("http://localhost:8080/api/v1/engineer/updateProfile", updateReq).subscribe((res) => {
-      console.log("api/v1/engineer/fetchProfile/100 = " + JSON.stringify(res));
-    });
+      this.authHttpService.post("http://localhost:8080/api/v1/engineer/updateProfile", updateReq).subscribe((res) => {
+        console.log("api/v1/engineer/fetchProfile/100 = " + JSON.stringify(res));
+      });
 
     this.authHttpService.post("http://localhost:8080/api/v1/engineer/addProfile", updateReq).subscribe((res) => {
       console.log("api/v1/engineer/fetchProfile/100 = " + JSON.stringify(res));

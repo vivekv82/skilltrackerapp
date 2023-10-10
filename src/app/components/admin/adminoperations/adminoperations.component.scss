@@ -1,0 +1,31 @@
+@use 'fonts';
+@use 'colors';
+
+.search-profile { 
+  width: 75%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.search-element {
+  width: 50%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between; /* This will create space between the divs */
+}
+
+.labeldiv, .valuediv {
+  flex: 1; /* This allows both divs to grow and fill the available space equally */
+  border: 1px solid #000; /* Optional: Add borders for visualization */
+  padding: 10px; /* Optional: Add padding for spacing */
+}
+
+.drop-down {
+  padding: 10px;
+  width: 100%;
+}

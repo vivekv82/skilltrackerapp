@@ -23,6 +23,22 @@ enum FormControlName {
   COMMUNICATION = "communication",
   APPTITUEDE = "aptitude"
 };
+
+const mappingskillvalues = {
+  "HTMLCSSJS": "HTML-CSS-JS",
+  "ANGULAR": "ANGULAR",
+  "REACT": "REACT",
+  "SPRING": "SPRING",
+  "RESTFUL": "RESTFUL",
+  "HIBERNATE": "HIBERNATE",
+  "GIT": "GIT",
+  "DOCKER": "DOCKER",
+  "JENKINS": "JENKINS",
+  "AWS": "AWS",
+  "SPOKEN": "SPOKEN",
+  "COMMUNICATION": "COMMUNICATION",
+  "APPTITUDE": "APPTITUDE"
+};
 type updateProfileValue = { [key in FormControlName]: string };
 @Component({
   selector: 'app-update-profile',
@@ -58,6 +74,17 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const updateProfileObj: string = sessionStorage.getItem('updateProfileObj') as string;
+    const updateProfile = JSON.parse(updateProfileObj);
+    console.log(updateProfile);
+    this.updateProfileFormGroup.setValue({'lastName': updateProfile.lastName});
+    this.updateProfileFormGroup.setValue({'firstName': updateProfile.firstName});
+    this.updateProfileFormGroup.setValue({'associateId': updateProfile.associateId});
+    this.updateProfileFormGroup.setValue({'mobile': updateProfile.mobile});
+    this.updateProfileFormGroup.setValue({'email': updateProfile.email});
+    //this.updateProfileFormGroup.setValue({mappingskillvalues["HTMLCSSJS"]: updateProfile.technicalSkillsList.get[0]});
+
+
   }
   ngOnDestroy(): void {
   };
