@@ -91,6 +91,7 @@ export class AddProfileComponent implements OnInit, OnDestroy {
       "associateId": associateId,
       "mobile": mobile,
       "email": email,
+      "date": new Date(),
       "technicalSkillsList": [
         {
           "skillName": "HTML-CSS-JAVASCRIPT",
