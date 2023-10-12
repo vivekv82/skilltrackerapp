@@ -1,89 +1,152 @@
-<div>
-  <form novalidate [formGroup]="updateProfileFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
-    <div class="mt-20">
-      <div class="label-margin">First Name </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="firstName" /></div>
+<div class="add-profile">
+  <div>
+    <h1>Update Profile</h1>
+  </div>
+  <div *ngIf="successMessage">
+    <div class="label-margin">{{successMessage}}. Click here to edit your <a class="linkclass"
+        (click)="navigateToUpdate()">profile</a> shown below</div>
+    <div>
+      <div class="mt-20">
+        <div class="ml-10 container">
+          <div class="labeldiv">First Name</div>
+          <div class="valuediv">{{userSkillProfile.firstName}}</div>
+        </div>
+        <div class="ml-10 container">
+          <div class="labeldiv">Last Name</div>
+          <div class="valuediv">{{userSkillProfile.lastName}}</div>
+        </div>
+        <div class="ml-10 container">
+          <div class="labeldiv">Associate ID</div>
+          <div class="valuediv">{{userSkillProfile.associateId}}</div>
+        </div>
+        <div class="ml-10 container">
+          <div class="labeldiv">Mobile</div>
+          <div class="valuediv">{{userSkillProfile.mobile}}</div>
+        </div>
+        <div class="ml-10 container">
+          <div class="labeldiv">Email</div>
+          <div class="valuediv">{{userSkillProfile.email}}</div>
+        </div>
+        <div class="mt-20">
+          <div>Technical Skills List</div>
+          <div class="ml-10 container" *ngFor="let techSkill of userSkillProfile.technicalSkillsList">
+            <div class="labeldiv">{{techSkill.skillName}}</div>
+            <div class="valuediv">{{techSkill.skillExpertiseLevel}}</div>
+          </div>
+        </div>
+        <div class="mt-20">
+          <div>Soft Skills List</div>
+          <div class="ml-10 container" *ngFor="let softSkill of userSkillProfile.softSkillsList">
+            <div class="labeldiv">{{softSkill.skillName}}</div>
+            <div class="valuediv">{{softSkill.skillExpertiseLevel}}</div>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">Last Name </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="lastName" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">Associate Id </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="associateId" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">Mobile </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="mobile" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">Email </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="email" /></div>
-    </div>
+  </div>
+  <div *ngIf="!successMessage">
+    <form novalidate [formGroup]="updateProfileFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
+      <div class="mt-20">
+        <div class="label-margin">First Name </div>
+        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="firstName" />
+        </div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">Last Name </div>
+        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="lastName" />
+        </div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">Associate Id </div>
+        <div><input type="text" class="text-box-border input-text input-text-padding" minlength="5" maxlength="30"
+            formControlName="associateId" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">Mobile </div>
+        <div><input type="text" class="text-box-border input-text input-text-padding" minlength="10" maxlength="10"
+            formControlName="mobile" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">Email </div>
+        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="email" /></div>
+      </div>
+
+      <div class="mt-20 mb-20">
+        <div class="label-margin">Technical Skills </div>
+      </div>
+
+      <div class="mt-20 mb-20">
+        <div class="label-margin">HTML-CSS-JAVASCRIPT </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding"
+            id="htmlcssjs" formControlName="htmlcssjs" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">ANGULAR </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="angular"
+            formControlName="angular" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">REACT </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
+            formControlName="react" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">SPRING </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
+            formControlName="spring" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">RESTFUL </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
+            formControlName="restful" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">HIBERNATE </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
+            formControlName="hibernate" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">GIT </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
+            formControlName="git" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">DOCKER </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
+            formControlName="docker" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">JENKINS </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
+            formControlName="jenkins" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">AWS </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
+            formControlName="aws" /></div>
+      </div>
 
 
-    <div class="mt-20 mb-20">
-      <div class="label-margin">Technical Skills </div>
-    </div>
-
-    <div class="mt-20 mb-20">
-      <div class="label-margin">HTML-CSS-JAVASCRIPT </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="htmlcssjs" formControlName="htmlcssjs" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">ANGULAR </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="angular" formControlName="angular" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">REACT </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="react" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">SPRING </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="spring" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">RESTFUL </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="restful" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">HIBERNATE </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="hibernate" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">GIT </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="git" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">DOCKER </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="docker" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">JENKINS </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="jenkins" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">AWS </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="aws" /></div>
-    </div>
-
-
-    <div class="mt-20 mb-20">
-      <div class="label-margin">Soft Skills </div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">SPOKEN </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="htmlcssjs" formControlName="spoken" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">COMMUNICATION </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="angular" formControlName="communication" /></div>
-    </div>
-    <div class="mt-20 mb-20">
-      <div class="label-margin">APTITUDE </div>
-      <div><input type="number" min="0" max="20" class="text-box-border input-text input-text-padding" id="react" formControlName="aptitude" /></div>
-    </div>
-
-    <div class="mt-20 mb-20"><button class="mb-20 button-submit" type="submit">Update Profile</button></div>
-  </form>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">Soft Skills </div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">SPOKEN </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding"
+            id="htmlcssjs" formControlName="spoken" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">COMMUNICATION </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="angular"
+            formControlName="communication" /></div>
+      </div>
+      <div class="mt-20 mb-20">
+        <div class="label-margin">APTITUDE </div>
+        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
+            formControlName="aptitude" /></div>
+      </div>
+      <div class="mt-20 mb-20"><button class="mb-20 button-submit" type="submit">Update Profile</button></div>
+    </form>
+  </div>
 </div>

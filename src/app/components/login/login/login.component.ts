@@ -32,12 +32,94 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    let userid = this.loginFormGroup.get('loginId');
-    let password = this.loginFormGroup.get('password');
     const loginData = this.loginFormGroup.value as LoginFormValue;
-
-    //this.loginService.submit();
-    this.router.navigate(['admin']);
-    //this.router.navigate(['fse/addProfile']);
+    const loginUser = this.loginFormGroup
+      .value as LoginFormValue;
+      let searchUserReq = {
+        lastName: '',
+        firstName: '',
+        associateId: loginData.loginId,
+        technicalSkillName: '',
+        softSkillName: '',
+      };
+    
+    if(loginUser.loginId.startsWith('CTS')) {
+      this.loginService.submit(searchUserReq).subscribe((res)=> {
+        const response = JSON.parse(JSON.stringify(res));
+        console.log("api/v1/engineer/fetchLoginProfile = " + response);
+        if (response.result == 0) {
+          this.router.navigate(['fse/updateProfile']);
+        } else {
+          sessionStorage.setItem('addUserSkillProfile', JSON.stringify({
+            lastName: '',
+            firstName: '',
+            associateId: loginUser.loginId,
+            mobile: '',
+            email: '',
+            date: new Date(),
+            technicalSkillsList: [
+              {
+                skillName: 'HTML-CSS-JAVASCRIPT',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'ANGULAR',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'REACT',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'SPRING',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'RESTFUL',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'HIBERNATE',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'GIT',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'DOCKER',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'JENKINS',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'AWS',
+                skillExpertiseLevel: 10,
+              },
+            ],
+            softSkillsList: [
+              {
+                skillName: 'SPOKEN',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'COMMUNICATION',
+                skillExpertiseLevel: 10,
+              },
+              {
+                skillName: 'APTITUDE',
+                skillExpertiseLevel: 10,
+              },
+            ],
+          }));
+          this.router.navigate(['fse/addProfile']);
+        }
+      });
+    } else {
+      this.router.navigate(['admin']);
+    }
+   
   }
 }

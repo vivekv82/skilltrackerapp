@@ -1,4 +1,8 @@
 <div class="container search-profile">
+  <div>
+    <h1>Welcome Admin</h1>
+    <div class="label-margin">Search for FSE Engineers with below criterias </div>
+  </div>
   <form novalidate [formGroup]="searchProfileFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
     <div class="mt-20 search-element">
       <div class="label-margin">First Name </div>
@@ -17,8 +21,6 @@
     <div class="mt-20 mb-20 search-element">
       <div class="label-margin">Technical Skill Name </div>
       <div>
-        <!-- <input type="text" class="text-box-border input-text input-text-padding" minlength="5" maxlength="30"
-          formControlName="technicalSkillName" /> -->
         <select formControlName="technicalSkillName" class="drop-down">
           <option>Choose one</option>
           <option *ngFor="let technicalSkillName of technicalSkillNameList" [value]="technicalSkillName">
@@ -29,8 +31,7 @@
 
     <div class="mt-20 mb-20 search-element">
       <div class="label-margin">Soft Skill Name </div>
-      <div><!-- <input type="text" class="text-box-border input-text input-text-padding" minlength="5" maxlength="30"
-          formControlName="softSkillName" /> -->
+      <div>
         <select formControlName="softSkillName" class="drop-down">
           <option>Choose one</option>
           <option *ngFor="let skillsoftSkillsName of skillsoftSkillsList" [value]="skillsoftSkillsName">
@@ -45,7 +46,7 @@
     <div class="label-margin">{{searchCrteria}}</div>
     <div *ngIf="resultsFound">
       <div class="mt-20 labeldiv" *ngFor="let profile of searchResults">
-        <div class="ml-10 container">Skill profile of {{profile.associateId}} : {{profile.firstName}},
+        <div class="ml-10 container label-margin">Skill profile of {{profile.associateId}} : {{profile.firstName}},
           {{profile.lastName}}</div>
         <div class="ml-10 container">
           <div class="labeldiv">First Name</div>

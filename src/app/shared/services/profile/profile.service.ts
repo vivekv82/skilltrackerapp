@@ -13,15 +13,11 @@ export class ProfileService {
   }
 
   public addNewProfile(addSkillReq: any) {
-    this.authHttpService.post("http://ec2-54-159-234-138.compute-1.amazonaws.com:8080/api/v1/engineer/addProfile", addSkillReq).subscribe((res) => {
-      console.log("api/v1/engineer/fetchProfile/100 = " + JSON.stringify(res));
-    });
+    return this.authHttpService.post("http://ec2-54-159-234-138.compute-1.amazonaws.com:8080/api/v1/engineer/addProfile", addSkillReq);
   }
   
   public updateNewProfile(updateSkillReq: any) {
-    this.authHttpService.post("https://ec2-54-159-234-138.compute-1.amazonaws.com:8080/api/v1/engineer/updateProfile", updateSkillReq).subscribe((res) => {
-      console.log("api/v1/engineer/fetchProfile/100 = " + JSON.stringify(res));
-    });
+    return this.authHttpService.post("http://ec2-54-159-234-138.compute-1.amazonaws.com:8080/api/v1/engineer/updateProfile", updateSkillReq)
   }
 
 }

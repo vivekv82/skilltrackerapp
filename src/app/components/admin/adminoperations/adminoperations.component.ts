@@ -35,7 +35,7 @@ export class AdminoperationsComponent implements OnInit, OnDestroy {
     'AWS',
   ];
 
-  public skillsoftSkillsList = ['SPOKEN', 'COMMUNICATION', 'APPTITUDE'];
+  public skillsoftSkillsList = ['SPOKEN', 'COMMUNICATION', 'APTITUDE'];
 
   constructor(
     public profileService: ProfileService,
@@ -46,8 +46,8 @@ export class AdminoperationsComponent implements OnInit, OnDestroy {
       lastName: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
       associateId: ['', [Validators.required]],
-      technicalSkillName: ['Choose one', [Validators.required]],
-      softSkillName: ['Choose one', [Validators.required]],
+      technicalSkillName: ['HTMLCSSJS', [Validators.required]],
+      softSkillName: ['SPOKEN', [Validators.required]],
     });
   }
 
@@ -74,10 +74,10 @@ export class AdminoperationsComponent implements OnInit, OnDestroy {
       softSkillName: softSkillName,
     };
     this.searchCrteria =
-      'First Name: ' + firstName + ' Last Name: ' + lastName + 
-      ' Associate Id: ' +
+      'First Name: ' + firstName + ', Last Name: ' + lastName + 
+      ', Associate Id: ' +
         associateId +
-        'Technical Skill Name: ' +
+        ', Technical Skill Name: ' +
         technicalSkillName +
         ' Soft Skill Name: ' +
         softSkillName;

@@ -4,52 +4,41 @@ import { Router } from '@angular/router';
 import { ProfileService } from '../../../shared/services/profile/profile.service';
 
 enum FormControlName {
-  LAST_NAME = "lastName",
-  FIRST_NAME = "firstName",
-  ASSOCIATE_ID = "associateId",
-  MOBILE = "mobile",
-  EMAIL = "email",
-  HTMLCSSJS = "htmlcssjs",
-  ANGULAR = "angular",
-  REACT = "react",
-  SPRING = "spring",
-  RESTFUL = "restful",
-  HIBERNATE = "hibernate",
-  GIT = "git",
-  DOCKER = "docker",
-  JENKINS = "jenkins",
-  AWS = "aws",
-  SPOKEN = "spoken",
-  COMMUNICATION = "communication",
-  APPTITUEDE = "aptitude"
-};
+  LAST_NAME = 'lastName',
+  FIRST_NAME = 'firstName',
+  ASSOCIATE_ID = 'associateId',
+  MOBILE = 'mobile',
+  EMAIL = 'email',
+  HTMLCSSJS = 'htmlcssjs',
+  ANGULAR = 'angular',
+  REACT = 'react',
+  SPRING = 'spring',
+  RESTFUL = 'restful',
+  HIBERNATE = 'hibernate',
+  GIT = 'git',
+  DOCKER = 'docker',
+  JENKINS = 'jenkins',
+  AWS = 'aws',
+  SPOKEN = 'spoken',
+  COMMUNICATION = 'communication',
+  APTITUEDE = 'aptitude',
+}
 
-const mappingskillvalues = {
-  "HTMLCSSJS": "HTML-CSS-JS",
-  "ANGULAR": "ANGULAR",
-  "REACT": "REACT",
-  "SPRING": "SPRING",
-  "RESTFUL": "RESTFUL",
-  "HIBERNATE": "HIBERNATE",
-  "GIT": "GIT",
-  "DOCKER": "DOCKER",
-  "JENKINS": "JENKINS",
-  "AWS": "AWS",
-  "SPOKEN": "SPOKEN",
-  "COMMUNICATION": "COMMUNICATION",
-  "APPTITUDE": "APPTITUDE"
-};
 type updateProfileValue = { [key in FormControlName]: string };
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.component.html',
-  styleUrls: ['./update-profile.component.scss']
+  styleUrls: ['./update-profile.component.scss'],
 })
 export class UpdateProfileComponent implements OnInit, OnDestroy {
-
   public updateProfileFormGroup: FormGroup;
-
-  constructor(public profileService: ProfileService, public fb: FormBuilder, public router: Router) { 
+  public successMessage: string = '';
+  public userSkillProfile: any;
+  constructor(
+    public profileService: ProfileService,
+    public fb: FormBuilder,
+    public router: Router
+  ) {
     this.updateProfileFormGroup = this.fb.group({
       lastName: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
@@ -57,7 +46,7 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
       mobile: ['', [Validators.required]],
       email: ['', [Validators.required]],
 
-      htmlcssjs: ['', [Validators.required,]],
+      htmlcssjs: ['', [Validators.required]],
       angular: ['', [Validators.required]],
       react: ['', [Validators.required]],
       spring: ['', [Validators.required]],
@@ -74,23 +63,54 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const updateProfileObj: string = sessionStorage.getItem('updateProfileObj') as string;
+    const updateProfileObj: string = sessionStorage.getItem(
+      'userSkillProfile'
+    ) as string;
     const updateProfile = JSON.parse(updateProfileObj);
     console.log(updateProfile);
-    this.updateProfileFormGroup.setValue({'lastName': updateProfile.lastName});
-    this.updateProfileFormGroup.setValue({'firstName': updateProfile.firstName});
-    this.updateProfileFormGroup.setValue({'associateId': updateProfile.associateId});
-    this.updateProfileFormGroup.setValue({'mobile': updateProfile.mobile});
-    this.updateProfileFormGroup.setValue({'email': updateProfile.email});
-    //this.updateProfileFormGroup.setValue({mappingskillvalues["HTMLCSSJS"]: updateProfile.technicalSkillsList.get[0]});
+    const techskills: { [key: string]: string } = {};
+    const softskills: { [key: string]: string } = {};
 
-
+    let mappingskillvalues: { [key: string]: string } = {
+      'HTML-CSS-JAVASCRIPT': 'htmlcssjs',
+      ANGULAR: 'angular',
+      REACT: 'react',
+      SPRING: 'spring',
+      RESTFUL: 'restful',
+      HIBERNATE: 'hibernate',
+      GIT: 'git',
+      DOCKER: 'docker',
+      JENKINS: 'jenkins',
+      AWS: 'aws',
+      SPOKEN: 'spoken',
+      COMMUNICATION: 'communication',
+      APTITUDE: 'aptitude',
+    };
+    updateProfile.technicalSkillsList.forEach((item: any) => {
+      let skillnamefromObj: string = item.skillName;
+      let skillnametemp: string = mappingskillvalues[skillnamefromObj];
+      techskills[skillnametemp] = item.skillExpertiseLevel;
+    });
+    updateProfile.softSkillsList.forEach((item: any) => {
+      let skillnamefromObj: string = item.skillName;
+      let skillnametemp: string = mappingskillvalues[skillnamefromObj];
+      softskills[skillnametemp] = item.skillExpertiseLevel;
+    });
+    this.updateProfileFormGroup.setValue({
+      lastName: updateProfile.lastName,
+      firstName: updateProfile.firstName,
+      associateId: updateProfile.associateId,
+      mobile: updateProfile.mobile,
+      email: updateProfile.email,
+      ...techskills,
+      ...softskills,
+    });
   }
-  ngOnDestroy(): void {
-  };
+  ngOnDestroy(): void {}
 
   onSubmit() {
-    const updateProfile = this.updateProfileFormGroup.value as updateProfileValue;
+    const updateProfile = this.updateProfileFormGroup
+      .value as updateProfileValue;
     let lastName = updateProfile.lastName;
     let firstName = updateProfile.firstName;
     let associateId = updateProfile.associateId;
@@ -112,73 +132,89 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
     let aptitude = updateProfile.aptitude;
 
     let updateSkillReq = {
-      "lastName": lastName,
-      "firstName": firstName,
-      "associateId": associateId,
-      "mobile": mobile,
-      "email": email,
-      "technicalSkillsList": [
+      lastName: lastName,
+      firstName: firstName,
+      associateId: associateId,
+      mobile: mobile,
+      email: email,
+      technicalSkillsList: [
         {
-          "skillName": "HTML-CSS-JAVASCRIPT",
-          "skillExpertiseLevel": htmlcssjs
+          skillName: 'HTML-CSS-JAVASCRIPT',
+          skillExpertiseLevel: htmlcssjs,
         },
         {
-          "skillName": "ANGULAR",
-          "skillExpertiseLevel": angular
+          skillName: 'ANGULAR',
+          skillExpertiseLevel: angular,
         },
         {
-          "skillName": "REACT",
-          "skillExpertiseLevel": react
+          skillName: 'REACT',
+          skillExpertiseLevel: react,
         },
         {
-          "skillName": "SPRING",
-          "skillExpertiseLevel": spring
-        },         
-        {
-          "skillName": "RESTFUL",
-          "skillExpertiseLevel": restful
+          skillName: 'SPRING',
+          skillExpertiseLevel: spring,
         },
         {
-          "skillName": "HIBERNATE",
-          "skillExpertiseLevel": hibernate
-        },  
-        {
-          "skillName": "GIT",
-          "skillExpertiseLevel": git
+          skillName: 'RESTFUL',
+          skillExpertiseLevel: restful,
         },
         {
-          "skillName": "DOCKER",
-          "skillExpertiseLevel": docker
-        },  
-        {
-          "skillName": "JENKINS",
-          "skillExpertiseLevel": jenkins
+          skillName: 'HIBERNATE',
+          skillExpertiseLevel: hibernate,
         },
         {
-          "skillName": "AWS",
-          "skillExpertiseLevel": aws
+          skillName: 'GIT',
+          skillExpertiseLevel: git,
+        },
+        {
+          skillName: 'DOCKER',
+          skillExpertiseLevel: docker,
+        },
+        {
+          skillName: 'JENKINS',
+          skillExpertiseLevel: jenkins,
+        },
+        {
+          skillName: 'AWS',
+          skillExpertiseLevel: aws,
         },
       ],
-      "softSkillsList": [
+      softSkillsList: [
         {
-          "skillName": "SPOKEN",
-          "skillExpertiseLevel": spoken
+          skillName: 'SPOKEN',
+          skillExpertiseLevel: spoken,
         },
         {
-          "skillName": "COMMUNICATION",
-          "skillExpertiseLevel": communication
+          skillName: 'COMMUNICATION',
+          skillExpertiseLevel: communication,
         },
         {
-          "skillName": "APTITUDE",
-          "skillExpertiseLevel": aptitude
+          skillName: 'APTITUDE',
+          skillExpertiseLevel: aptitude,
         },
-      ]
-  };
+      ],
+    };
 
-
-    this.profileService.updateNewProfile(updateSkillReq);
-    //this.router.navigate(['admin']);
-    this.router.navigate(['fse/addProfile']);
+    this.profileService.updateNewProfile(updateSkillReq).subscribe((res) => {
+      const response = JSON.parse(JSON.stringify(res));
+      console.log('Result found for ', updateSkillReq + response);
+      if (response.result == 0) {
+        this.successMessage = 'Profile updated successfully';
+        sessionStorage.setItem(
+          'userSkillProfile',
+          JSON.stringify(updateSkillReq)
+        );
+        this.userSkillProfile = updateSkillReq;
+      } else {
+      }
+    });
   }
 
+  public navigateToUpdate() {
+    this.successMessage ='';
+  }
+
+  public fetchAddedProfile() {
+    this.userSkillProfile = sessionStorage.getItem('userSkillProfile');
+  }
 }
