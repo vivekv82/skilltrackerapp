@@ -1,4 +1,4 @@
-<div class="update-profile">
+<div [ngClass]="{'update-profile-confirm' : successMessage, 'update-profile': !successMessage}">
   <div>
     <h1>Update Profile</h1>
   </div>
@@ -144,7 +144,6 @@
               {{skillLevel}}
           </select></div>
       </div>
-
 
       <div class="mt-20 mb-20">
         <div class="label-margin">Soft Skills </div>
