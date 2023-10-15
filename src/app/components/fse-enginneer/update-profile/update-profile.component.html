@@ -1,4 +1,4 @@
-<div class="add-profile">
+<div class="update-profile">
   <div>
     <h1>Update Profile</h1>
   </div>
@@ -49,27 +49,25 @@
     <form novalidate [formGroup]="updateProfileFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
       <div class="mt-20">
         <div class="label-margin">First Name </div>
-        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="firstName" />
+        <div>{{userSkillProfile.firstName}}
         </div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">Last Name </div>
-        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="lastName" />
+        <div>{{userSkillProfile.lastName}}
         </div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">Associate Id </div>
-        <div><input type="text" class="text-box-border input-text input-text-padding" minlength="5" maxlength="30"
-            formControlName="associateId" /></div>
+        <div>{{userSkillProfile.associateId}}</div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">Mobile </div>
-        <div><input type="text" class="text-box-border input-text input-text-padding" minlength="10" maxlength="10"
-            formControlName="mobile" /></div>
+        <div>{{userSkillProfile.mobile}}</div>
       </div>
       <div class="mt-20 mb-20">
-        <div class="label-margin">Email </div>
-        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="email" /></div>
+        <div class="label-margin">Email Address </div>
+        <div>{{userSkillProfile.email}}</div>
       </div>
 
       <div class="mt-20 mb-20">
@@ -78,53 +76,73 @@
 
       <div class="mt-20 mb-20">
         <div class="label-margin">HTML-CSS-JAVASCRIPT </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding"
-            id="htmlcssjs" formControlName="htmlcssjs" /></div>
+        <div><select formControlName="htmlcssjs" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">ANGULAR </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="angular"
-            formControlName="angular" /></div>
+        <div><select formControlName="angular" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">REACT </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
-            formControlName="react" /></div>
+        <div><select formControlName="react" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">SPRING </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
-            formControlName="spring" /></div>
+        <div><select formControlName="spring" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">RESTFUL </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
-            formControlName="restful" /></div>
+        <div><select formControlName="restful" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">HIBERNATE </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
-            formControlName="hibernate" /></div>
+        <div><select formControlName="hibernate" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">GIT </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
-            formControlName="git" /></div>
+        <div><select formControlName="git" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">DOCKER </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
-            formControlName="docker" /></div>
+        <div><select formControlName="docker" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">JENKINS </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
-            formControlName="jenkins" /></div>
+        <div><select formControlName="jenkins" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">AWS </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
-            formControlName="aws" /></div>
+        <div><select formControlName="aws" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
 
 
@@ -133,18 +151,24 @@
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">SPOKEN </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding"
-            id="htmlcssjs" formControlName="spoken" /></div>
+        <div><select formControlName="spoken" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">COMMUNICATION </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="angular"
-            formControlName="communication" /></div>
+        <div><select formControlName="communication" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">APTITUDE </div>
-        <div><input type="number" min="0" max="20" class="text-box-border input-number input-text-padding" id="react"
-            formControlName="aptitude" /></div>
+        <div><select formControlName="aptitude" class="drop-down">
+            <option *ngFor="let skillLevel of skillLevel" [value]="skillLevel">
+              {{skillLevel}}
+          </select></div>
       </div>
       <div class="mt-20 mb-20"><button class="mb-20 button-submit" type="submit">Update Profile</button></div>
     </form>

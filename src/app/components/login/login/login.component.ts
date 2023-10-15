@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log("api/v1/engineer/fetchLoginProfile = " + response);
         if (response.result == 0) {
           this.router.navigate(['fse/updateProfile']);
+          sessionStorage.setItem('userSkillProfile', JSON.stringify(response.resposnse[0]));
         } else {
           sessionStorage.setItem('addUserSkillProfile', JSON.stringify({
             lastName: '',

@@ -49,27 +49,45 @@
     <form novalidate [formGroup]="addProfileFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
       <div class="mt-20">
         <div class="label-margin">First Name </div>
-        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="firstName" />
+        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="firstName"
+            maxlength="30" />
+            <div class="error-message"
+            *ngIf="addProfileFormGroup.controls['firstName'].touched && addProfileFormGroup.controls['firstName'].invalid">
+            First Name is mandatory in 5 - 30 in length and must contain only alpha characters.</div>
         </div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">Last Name </div>
-        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="lastName" />
+        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="lastName" maxlength="30" />
+          <div class="error-message"
+            *ngIf="addProfileFormGroup.controls['lastName'].touched && addProfileFormGroup.controls['lastName'].invalid">
+            Last Name is mandatory in 5 - 30 in length and must contain only alpha characters.</div>
         </div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">Associate Id </div>
         <div><input type="text" class="text-box-border input-text input-text-padding" minlength="5" maxlength="30"
-            formControlName="associateId" /></div>
+            formControlName="associateId" />
+          <div class="error-message"
+            *ngIf="addProfileFormGroup.controls['associateId'].touched && addProfileFormGroup.controls['associateId'].invalid">
+            AssociateID must be minimum 5 in length, prefixed with CTS and followed by max 27 numericals</div>
+        </div>
       </div>
       <div class="mt-20 mb-20">
         <div class="label-margin">Mobile </div>
-        <div><input type="text" class="text-box-border input-text input-text-padding" minlength="10" maxlength="10"
-            formControlName="mobile" /></div>
+        <div><input type="tel" class="text-box-border input-text input-text-padding" minlength="10" maxlength="10"
+            pattern="[0-9]{10}" (keydown)="filterNonNumbers($event, 'mobile')" formControlName="mobile" />
+            <div class="error-message"
+            *ngIf="addProfileFormGroup.controls['mobile'].touched && addProfileFormGroup.controls['mobile'].invalid">
+            Mobile number is invalid.</div></div>
       </div>
       <div class="mt-20 mb-20">
-        <div class="label-margin">Email </div>
-        <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="email" /></div>
+        <div class="label-margin">Email Address </div>
+        <div><input type="text" class="text-box-border input-text input-text-padding" maxlength="45"
+            formControlName="email" />
+            <div class="error-message"
+            *ngIf="addProfileFormGroup.controls['email'].touched && addProfileFormGroup.controls['email'].invalid">
+            Email Address is invalid.</div></div>
       </div>
 
       <div class="mt-20 mb-20">

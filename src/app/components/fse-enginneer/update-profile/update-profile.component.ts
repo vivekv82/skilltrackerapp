@@ -34,40 +34,64 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
   public updateProfileFormGroup: FormGroup;
   public successMessage: string = '';
   public userSkillProfile: any;
+  public skillLevel = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  ];
   constructor(
     public profileService: ProfileService,
     public fb: FormBuilder,
     public router: Router
   ) {
+    this.fetchAddedProfile();
     this.updateProfileFormGroup = this.fb.group({
-      lastName: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      associateId: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      lastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      associateId: [
+        this.userSkillProfile.associateId,
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(30),
+          Validators.pattern(/cts\d+/i),
+        ],
+      ],
+      mobile: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[0-9]*$'),
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(45),
+          Validators.pattern(
+            '^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
+          ),
+        ],
+      ],
 
-      htmlcssjs: ['', [Validators.required]],
-      angular: ['', [Validators.required]],
-      react: ['', [Validators.required]],
-      spring: ['', [Validators.required]],
-      restful: ['', [Validators.required]],
-      hibernate: ['', [Validators.required]],
-      git: ['', [Validators.required]],
-      docker: ['', [Validators.required]],
-      jenkins: ['', [Validators.required]],
-      aws: ['', [Validators.required]],
-      spoken: ['', [Validators.required]],
-      communication: ['', [Validators.required]],
-      aptitude: ['', [Validators.required]],
+      htmlcssjs: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      angular: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      react: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      spring: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      restful: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      hibernate: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      git: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      docker: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      jenkins: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      aws: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      spoken: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      communication: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      aptitude: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
     });
   }
 
   ngOnInit(): void {
-    const updateProfileObj: string = sessionStorage.getItem(
-      'userSkillProfile'
-    ) as string;
-    const updateProfile = JSON.parse(updateProfileObj);
-    console.log(updateProfile);
     const techskills: { [key: string]: string } = {};
     const softskills: { [key: string]: string } = {};
 
@@ -86,22 +110,22 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
       COMMUNICATION: 'communication',
       APTITUDE: 'aptitude',
     };
-    updateProfile.technicalSkillsList.forEach((item: any) => {
+    this.userSkillProfile.technicalSkillsList.forEach((item: any) => {
       let skillnamefromObj: string = item.skillName;
       let skillnametemp: string = mappingskillvalues[skillnamefromObj];
       techskills[skillnametemp] = item.skillExpertiseLevel;
     });
-    updateProfile.softSkillsList.forEach((item: any) => {
+    this.userSkillProfile.softSkillsList.forEach((item: any) => {
       let skillnamefromObj: string = item.skillName;
       let skillnametemp: string = mappingskillvalues[skillnamefromObj];
       softskills[skillnametemp] = item.skillExpertiseLevel;
     });
     this.updateProfileFormGroup.setValue({
-      lastName: updateProfile.lastName,
-      firstName: updateProfile.firstName,
-      associateId: updateProfile.associateId,
-      mobile: updateProfile.mobile,
-      email: updateProfile.email,
+      lastName: this.userSkillProfile.lastName,
+      firstName: this.userSkillProfile.firstName,
+      associateId: this.userSkillProfile.associateId,
+      mobile: this.userSkillProfile.mobile,
+      email: this.userSkillProfile.email,
       ...techskills,
       ...softskills,
     });
@@ -113,7 +137,7 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
       .value as updateProfileValue;
     let lastName = updateProfile.lastName;
     let firstName = updateProfile.firstName;
-    let associateId = updateProfile.associateId;
+    let associateId = updateProfile.associateId.toUpperCase();
     let mobile = updateProfile.mobile;
     let email = updateProfile.email;
 
@@ -215,6 +239,8 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
   }
 
   public fetchAddedProfile() {
-    this.userSkillProfile = sessionStorage.getItem('userSkillProfile');
+    this.userSkillProfile = JSON.parse(sessionStorage.getItem(
+      'userSkillProfile'
+    ) as string);
   }
 }

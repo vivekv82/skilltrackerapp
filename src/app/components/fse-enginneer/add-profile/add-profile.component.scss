@@ -2,10 +2,9 @@
 @use 'colors';
 
 .add-profile { 
-  width: 100%;
+  width: 40%;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: block;
   justify-content: center;
   align-items: center;
   margin-top: 40px;
@@ -24,5 +23,11 @@
 
 .drop-down {
   padding: 10px;
+  width: 50%;
+}
+
+.error-message {
   width: 100%;
+  display: block;
+  color: red;
 }

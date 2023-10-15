@@ -35,7 +35,7 @@ export class AddProfileComponent implements OnInit, OnDestroy {
   public successMessage: string = '';
   public userSkillProfile: any;
   public skillLevel = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
 
   constructor(
@@ -47,25 +47,66 @@ export class AddProfileComponent implements OnInit, OnDestroy {
       sessionStorage.getItem('addUserSkillProfile') as string
     );
     this.addProfileFormGroup = this.fb.group({
-      lastName: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      associateId: [addUserSkillProfile.associateId, [Validators.required]],
-      mobile: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(30),
+          Validators.pattern(/^[a-zA-Z]+$/),
+        ],
+      ],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(30),
+          Validators.pattern(/^[a-zA-Z]+$/),
+        ],
+      ],
+      associateId: [
+        addUserSkillProfile.associateId,
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(30),
+          Validators.pattern(/cts\d+/i),
+        ],
+      ],
+      mobile: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[0-9]*$'),
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(45),
+          Validators.pattern(
+            '^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
+          ),
+        ],
+      ],
 
-      htmlcssjs: [1, [Validators.required]],
-      angular: [1, [Validators.required]],
-      react: [1, [Validators.required]],
-      spring: [1, [Validators.required]],
-      restful: [1, [Validators.required]],
-      hibernate: [1, [Validators.required]],
-      git: [1, [Validators.required]],
-      docker: [1, [Validators.required]],
-      jenkins: [1, [Validators.required]],
-      aws: [1, [Validators.required]],
-      spoken: [1, [Validators.required]],
-      communication: [1, [Validators.required]],
-      aptitude: [1, [Validators.required]],
+      htmlcssjs: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      angular: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      react: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      spring: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      restful: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      hibernate: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      git: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      docker: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      jenkins: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      aws: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      spoken: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      communication: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
+      aptitude: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
     });
   }
 
@@ -76,7 +117,7 @@ export class AddProfileComponent implements OnInit, OnDestroy {
     const addProfile = this.addProfileFormGroup.value as addProfileValue;
     let lastName = addProfile.lastName;
     let firstName = addProfile.firstName;
-    let associateId = addProfile.associateId;
+    let associateId = addProfile.associateId.toUpperCase();
     let mobile = addProfile.mobile;
     let email = addProfile.email;
 
@@ -169,6 +210,18 @@ export class AddProfileComponent implements OnInit, OnDestroy {
       } else {
       }
     });
+  }
+
+  filterNonNumbers(event: any, field: string) {
+    const keyCode = event.keyCode || event.charCode;
+    if (
+      isNaN(event.key) &&
+      !(keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39)
+    ) {
+      event.stopPropagation();
+      return false;
+    }
+    return true;
   }
 
   public navigateToUpdate() {
