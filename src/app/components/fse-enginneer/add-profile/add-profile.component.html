@@ -1,9 +1,9 @@
-<div class="add-profile">
+<div class="successMessage ? add-profile-confirm : add-profile">
   <div>
     <h1>Add New Profile</h1>
   </div>
   <div *ngIf="successMessage">
-    <div class="label-margin">{{successMessage}}. Click here to edit your <a href="#"
+    <div class="label-margin">{{successMessage}} You can update your profile post 14 days of adding new one. Click here to edit your <a href="#"
         (click)="navigateToUpdate()">profile</a> shown below</div>
     <div>
       <div class="mt-20">
