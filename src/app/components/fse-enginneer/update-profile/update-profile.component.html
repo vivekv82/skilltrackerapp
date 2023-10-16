@@ -1,4 +1,4 @@
-<div [ngClass]="{'update-profile-confirm' : successMessage, 'update-profile': !successMessage}">
+<div [ngClass]="{'update-profile-confirm' : successMessage || displayMessage, 'update-profile': !successMessage || !displayMessage}">
   <div>
     <h1>Update Profile </h1>
   </div>
@@ -29,14 +29,14 @@
           <div class="valuediv">{{userSkillProfile.email}}</div>
         </div>
         <div class="mt-20">
-          <div>Technical Skills List</div>
+          <div class="label-margin">Technical Skills List</div>
           <div class="ml-10 container" *ngFor="let techSkill of userSkillProfile.technicalSkillsList">
             <div class="labeldiv">{{techSkill.skillName}}</div>
             <div class="valuediv">{{techSkill.skillExpertiseLevel}}</div>
           </div>
         </div>
         <div class="mt-20">
-          <div>Soft Skills List</div>
+          <div class="label-margin">Soft Skills List</div>
           <div class="ml-10 container" *ngFor="let softSkill of userSkillProfile.softSkillsList">
             <div class="labeldiv">{{softSkill.skillName}}</div>
             <div class="valuediv">{{softSkill.skillExpertiseLevel}}</div>
