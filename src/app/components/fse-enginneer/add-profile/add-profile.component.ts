@@ -136,11 +136,11 @@ export class AddProfileComponent implements OnInit, OnDestroy {
     let aptitude = addProfile.aptitude;
 
     let addSkillReq = {
-      lastName: lastName,
-      firstName: firstName,
-      associateId: associateId,
-      mobile: mobile,
-      email: email,
+      lastName: lastName.trim(),
+      firstName: firstName.trim(),
+      associateId: associateId.trim(),
+      mobile: mobile.trim(),
+      email: email.trim(),
       date: new Date(),
       technicalSkillsList: [
         {

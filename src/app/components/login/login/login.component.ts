@@ -41,13 +41,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     let searchUserReq = {
       lastName: '',
       firstName: '',
-      associateId: loginData.loginId,
+      associateId: loginData.loginId.trim(),
       technicalSkillName: '',
       softSkillName: '',
     };
     let loginUserReq = {
-      userid: loginUser.loginId,
-      password: loginUser.password,
+      userid: loginUser.loginId.trim(),
+      password: loginUser.password.trim(),
     };
     this.loginService.doLogin(loginUserReq).subscribe((res) => {
       const loginResponse = JSON.parse(JSON.stringify(res));
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 JSON.stringify({
                   lastName: '',
                   firstName: '',
-                  associateId: loginUser.loginId,
+                  associateId: loginUser.loginId.trim(),
                   mobile: '',
                   email: '',
                   date: new Date(),
