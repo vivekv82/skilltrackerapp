@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.loginService.submit(searchUserReq).subscribe((res)=> {
         const response = JSON.parse(JSON.stringify(res));
         console.log("api/v1/engineer/fetchLoginProfile = " + response);
+        sessionStorage.setItem('isLogin', "true");
         if (response.result == 0) {
           this.router.navigate(['fse/updateProfile']);
           sessionStorage.setItem('userSkillProfile', JSON.stringify(response.resposnse[0]));
@@ -119,6 +120,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       });
     } else {
+      sessionStorage.setItem('isLogin', "true");
       this.router.navigate(['admin']);
     }
    

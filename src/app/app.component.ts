@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'skilltrackerapp';
+  constructor(public router: Router) {
+  }
+
+  logout() {
+    sessionStorage.removeItem('userSkillProfile');
+    sessionStorage.removeItem('addUserSkillProfile');
+    sessionStorage.removeItem('isLogin');
+    this.router.navigate(['/login']);
+  }
+
+  isLogin() {
+    return sessionStorage.getItem("isLogin") === "true";
+  }
 }
