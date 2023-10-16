@@ -15,14 +15,18 @@ type LoginFormValue = { [key in FormControlName]: string };
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public loginFormGroup: FormGroup;
-  constructor(public loginService: LoginService, public fb: FormBuilder, public router: Router) {
+  loginFailed: boolean = false;
+  constructor(
+    public loginService: LoginService,
+    public fb: FormBuilder,
+    public router: Router
+  ) {
     this.loginFormGroup = this.fb.group({
       loginId: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
-  ngOnDestroy(): void {
-  };
+  ngOnDestroy(): void {}
 
   ngOnInit(): void {
     this.loginFormGroup = this.fb.group({
@@ -33,96 +37,111 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const loginData = this.loginFormGroup.value as LoginFormValue;
-    const loginUser = this.loginFormGroup
-      .value as LoginFormValue;
-      let searchUserReq = {
-        lastName: '',
-        firstName: '',
-        associateId: loginData.loginId,
-        technicalSkillName: '',
-        softSkillName: '',
-      };
-    
-    if(loginUser.loginId.startsWith('CTS')) {
-      this.loginService.submit(searchUserReq).subscribe((res)=> {
-        const response = JSON.parse(JSON.stringify(res));
-        console.log("api/v1/engineer/fetchLoginProfile = " + response);
-        sessionStorage.setItem('isLogin', "true");
-        if (response.result == 0) {
-          this.router.navigate(['fse/updateProfile']);
-          sessionStorage.setItem('userSkillProfile', JSON.stringify(response.resposnse[0]));
-        } else {
-          sessionStorage.setItem('addUserSkillProfile', JSON.stringify({
-            lastName: '',
-            firstName: '',
-            associateId: loginUser.loginId,
-            mobile: '',
-            email: '',
-            date: new Date(),
-            technicalSkillsList: [
-              {
-                skillName: 'HTML-CSS-JAVASCRIPT',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'ANGULAR',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'REACT',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'SPRING',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'RESTFUL',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'HIBERNATE',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'GIT',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'DOCKER',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'JENKINS',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'AWS',
-                skillExpertiseLevel: 10,
-              },
-            ],
-            softSkillsList: [
-              {
-                skillName: 'SPOKEN',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'COMMUNICATION',
-                skillExpertiseLevel: 10,
-              },
-              {
-                skillName: 'APTITUDE',
-                skillExpertiseLevel: 10,
-              },
-            ],
-          }));
-          this.router.navigate(['fse/addProfile']);
+    const loginUser = this.loginFormGroup.value as LoginFormValue;
+    let searchUserReq = {
+      lastName: '',
+      firstName: '',
+      associateId: loginData.loginId,
+      technicalSkillName: '',
+      softSkillName: '',
+    };
+    let loginUserReq = {
+      userid: loginUser.loginId,
+      password: loginUser.password,
+    };
+    this.loginService.doLogin(loginUserReq).subscribe((res) => {
+      const loginResponse = JSON.parse(JSON.stringify(res));
+      if (loginResponse.result == 0) {
+        const role = loginResponse.resposnse[0].role;
+        if (role === 'admin') {
+          sessionStorage.setItem('isLogin', 'true');
+          this.router.navigate(['admin']);
+        } else if (role === 'fseengineer') {
+          this.loginService.submit(searchUserReq).subscribe((res) => {
+            const response = JSON.parse(JSON.stringify(res));
+            console.log('api/v1/engineer/fetchLoginProfile = ' + response);
+            sessionStorage.setItem('isLogin', 'true');
+            if (response.result == 0) {
+              this.router.navigate(['fse/updateProfile']);
+              sessionStorage.setItem(
+                'userSkillProfile',
+                JSON.stringify(response.resposnse[0])
+              );
+            } else {
+              sessionStorage.setItem(
+                'addUserSkillProfile',
+                JSON.stringify({
+                  lastName: '',
+                  firstName: '',
+                  associateId: loginUser.loginId,
+                  mobile: '',
+                  email: '',
+                  date: new Date(),
+                  technicalSkillsList: [
+                    {
+                      skillName: 'HTML-CSS-JAVASCRIPT',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'ANGULAR',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'REACT',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'SPRING',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'RESTFUL',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'HIBERNATE',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'GIT',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'DOCKER',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'JENKINS',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'AWS',
+                      skillExpertiseLevel: 10,
+                    },
+                  ],
+                  softSkillsList: [
+                    {
+                      skillName: 'SPOKEN',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'COMMUNICATION',
+                      skillExpertiseLevel: 10,
+                    },
+                    {
+                      skillName: 'APTITUDE',
+                      skillExpertiseLevel: 10,
+                    },
+                  ],
+                })
+              );
+              this.router.navigate(['fse/addProfile']);
+            }
+          });
         }
-      });
-    } else {
-      sessionStorage.setItem('isLogin', "true");
-      this.router.navigate(['admin']);
-    }
-   
+      } else {
+        this.loginFailed = true;
+      }
+    });
   }
 }
