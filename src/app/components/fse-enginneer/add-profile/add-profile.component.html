@@ -4,7 +4,7 @@
   </div>
   <div *ngIf="successMessage">
     <div class="label-margin">{{successMessage}} You can update your profile post 14 days of adding new one. Click here
-      to edit your <a href="#" (click)="navigateToUpdate()">profile</a> shown below</div>
+      to edit your <a class="linkclass" (click)="navigateToUpdate()">profile</a> shown below</div>
     <div>
       <div class="mt-20">
         <div class="ml-10 container">
@@ -28,14 +28,14 @@
           <div class="valuediv">{{userSkillProfile.email}}</div>
         </div>
         <div class="mt-20">
-          <div>Technical Skills List</div>
+          <div class="label-margin">Technical Skills List</div>
           <div class="ml-10 container" *ngFor="let techSkill of userSkillProfile.technicalSkillsList">
             <div class="labeldiv">{{techSkill.skillName}}</div>
             <div class="valuediv">{{techSkill.skillExpertiseLevel}}</div>
           </div>
         </div>
         <div class="mt-20">
-          <div>Soft Skills List</div>
+          <div class="label-margin">Soft Skills List</div>
           <div class="ml-10 container" *ngFor="let softSkill of userSkillProfile.softSkillsList">
             <div class="labeldiv">{{softSkill.skillName}}</div>
             <div class="valuediv">{{softSkill.skillExpertiseLevel}}</div>

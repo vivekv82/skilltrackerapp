@@ -62,7 +62,7 @@ $headings-dark-color: #043167;
 
 h1,
 .header-h1 {
-  @include Roboto(light);
+  @include Roboto(bold);
   font-size: 24px !important;
   color: $skills-orange !important;
   line-height: 32px;

@@ -37,6 +37,9 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
   public skillLevel = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
+  public createdDate: any;
+  public updateSuccess: boolean = false;
+  public displayMessage: string = "";
   constructor(
     public profileService: ProfileService,
     public fb: FormBuilder,
@@ -89,6 +92,15 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
       communication: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
       aptitude: [0, [Validators.required, Validators.pattern(/\d{1,2}/)]],
     });
+    this.createdDate = this.userSkillProfile.createdDate;
+  }
+
+  isEditable() {
+    let currentDateTime = (new Date()).getTime();
+    let createdDateTime = new Date(this.createdDate).getTime();
+    let days: number = Math.floor(currentDateTime - createdDateTime)/ 1000 / 60 / 60 / 24;
+    this.displayMessage = days > 14? "": "There will be a 14 days gap to edit your profile.";
+    return days > 14;
   }
 
   ngOnInit(): void {
@@ -217,25 +229,28 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
           skillExpertiseLevel: aptitude,
         },
       ],
+      createdDate: this.createdDate
     };
 
     this.profileService.updateNewProfile(updateSkillReq).subscribe((res) => {
       const response = JSON.parse(JSON.stringify(res));
       console.log('Result found for ', updateSkillReq + response);
       if (response.result == 0) {
-        this.successMessage = 'Profile updated successfully';
+        this.updateSuccess = true;
+        this.successMessage = 'Profile updated successfully.';
         sessionStorage.setItem(
           'userSkillProfile',
           JSON.stringify(updateSkillReq)
         );
         this.userSkillProfile = updateSkillReq;
       } else {
+        this.updateSuccess = false;
       }
     });
   }
 
   public navigateToUpdate() {
-    this.successMessage ='';
+    this.updateSuccess = false;
   }
 
   public fetchAddedProfile() {

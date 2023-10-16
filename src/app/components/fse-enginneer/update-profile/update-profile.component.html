@@ -1,9 +1,10 @@
 <div [ngClass]="{'update-profile-confirm' : successMessage, 'update-profile': !successMessage}">
   <div>
-    <h1>Update Profile</h1>
+    <h1>Update Profile </h1>
   </div>
-  <div *ngIf="successMessage">
-    <div class="label-margin">{{successMessage}}. Click here to edit your <a class="linkclass"
+  <div *ngIf="!isEditable()" class="label-margin">{{displayMessage}} You can review the profile added below.</div>
+  <div *ngIf="updateSuccess || !isEditable()">
+    <div *ngIf="isEditable()" class="label-margin">{{successMessage}} Click here to edit your <a class="linkclass"
         (click)="navigateToUpdate()">profile</a> shown below</div>
     <div>
       <div class="mt-20">
@@ -45,7 +46,7 @@
 
     </div>
   </div>
-  <div *ngIf="!successMessage">
+  <div *ngIf="!updateSuccess && isEditable()">
     <form novalidate [formGroup]="updateProfileFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
       <div class="mt-20">
         <div class="label-margin">First Name </div>
