@@ -43,9 +43,28 @@ export class AdminoperationsComponent implements OnInit, OnDestroy {
     public router: Router
   ) {
     this.searchProfileFormGroup = this.fb.group({
-      lastName: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      associateId: ['', [Validators.required]],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(30),
+          Validators.pattern(/^[a-zA-Z]+$/),
+        ],
+      ],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(30),
+          Validators.pattern(/^[a-zA-Z]+$/),
+        ],
+      ],
+      associateId: [
+        '',
+        [
+          Validators.pattern(/cts\d+/i),
+        ],
+      ],
       technicalSkillName: ['HTMLCSSJS', [Validators.required]],
       softSkillName: ['SPOKEN', [Validators.required]],
     });
@@ -62,7 +81,7 @@ export class AdminoperationsComponent implements OnInit, OnDestroy {
       .value as searchProfileValue;
     let lastName = searchProfile.lastName;
     let firstName = searchProfile.firstName;
-    let associateId = searchProfile.associateId;
+    let associateId = searchProfile.associateId.toUpperCase();
     let technicalSkillName = searchProfile.technicalSkillName;
     let softSkillName = searchProfile.softSkillName;
 
@@ -74,13 +93,16 @@ export class AdminoperationsComponent implements OnInit, OnDestroy {
       softSkillName: softSkillName,
     };
     this.searchCrteria =
-      'First Name: ' + firstName + ', Last Name: ' + lastName + 
+      'First Name: ' +
+      firstName +
+      ', Last Name: ' +
+      lastName +
       ', Associate Id: ' +
-        associateId +
-        ', Technical Skill Name: ' +
-        technicalSkillName +
-        ' Soft Skill Name: ' +
-        softSkillName;
+      associateId +
+      ', Technical Skill Name: ' +
+      technicalSkillName +
+      ' Soft Skill Name: ' +
+      softSkillName;
     this.profileService.searchProfile(searchSkillReq).subscribe((res) => {
       const response = JSON.parse(JSON.stringify(res));
       console.log('Result found for ', searchSkillReq + response);

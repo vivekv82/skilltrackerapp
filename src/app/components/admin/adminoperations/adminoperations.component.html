@@ -6,23 +6,41 @@
   <form novalidate [formGroup]="searchProfileFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
     <div class="mt-20 search-element">
       <div class="label-margin">First Name </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="firstName" /></div>
+      <div><input type="text"
+          [ngClass]="{'validation-error': searchProfileFormGroup.controls['firstName'].touched && searchProfileFormGroup.controls['firstName'].invalid}"
+          class="text-box-border input-text input-text-padding" class="text-box-border input-text input-text-padding"
+          formControlName="firstName" />
+        <div class="error-message"
+          *ngIf="searchProfileFormGroup.controls['firstName'].touched && searchProfileFormGroup.controls['firstName'].invalid">
+          First Name is mandatory in 5 - 30 in length and must contain only alpha characters.</div>
+      </div>
     </div>
     <div class="mt-20 mb-20 search-element">
       <div class="label-margin">Last Name </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="lastName" /></div>
+      <div><input type="text"
+          [ngClass]="{'validation-error': searchProfileFormGroup.controls['lastName'].touched && searchProfileFormGroup.controls['lastName'].invalid}"
+          class="text-box-border input-text input-text-padding" formControlName="lastName" />
+        <div class="error-message"
+          *ngIf="searchProfileFormGroup.controls['lastName'].touched && searchProfileFormGroup.controls['lastName'].invalid">
+          Last Name is mandatory in 5 - 30 in length and must contain only alpha characters.</div>
+      </div>
     </div>
     <div class="mt-20 mb-20 search-element">
       <div class="label-margin">Associate Id </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" minlength="5" maxlength="30"
-          formControlName="associateId" /></div>
+      <div><input type="text"
+          [ngClass]="{'validation-error': searchProfileFormGroup.controls['associateId'].touched && searchProfileFormGroup.controls['associateId'].invalid}"
+          class="text-box-border input-text input-text-padding" minlength="5" maxlength="30"
+          formControlName="associateId" />
+        <div class="error-message"
+          *ngIf="searchProfileFormGroup.controls['associateId'].touched && searchProfileFormGroup.controls['associateId'].invalid">
+          AssociateID must be minimum 5 in length, prefixed with CTS and followed by max 27 numericals</div>
+      </div>
     </div>
 
     <div class="mt-20 mb-20 search-element">
       <div class="label-margin">Technical Skill Name </div>
       <div>
         <select formControlName="technicalSkillName" class="drop-down">
-          <option>Choose one</option>
           <option *ngFor="let technicalSkillName of technicalSkillNameList" [value]="technicalSkillName">
             {{technicalSkillName}}
         </select>
@@ -33,7 +51,6 @@
       <div class="label-margin">Soft Skill Name </div>
       <div>
         <select formControlName="softSkillName" class="drop-down">
-          <option>Choose one</option>
           <option *ngFor="let skillsoftSkillsName of skillsoftSkillsList" [value]="skillsoftSkillsName">
             {{skillsoftSkillsName}}
         </select>
@@ -42,7 +59,7 @@
     </div>
 
 
-    <div class="mt-20 mb-20 search-element"><button class="mb-20 button-submit" type="submit">Search</button></div>
+    <div class="mt-20 mb-20 search-element"><button class="mb-20 button-submit" type="submit" [disabled]="!searchProfileFormGroup.valid">Search</button></div>
     <div class="label-margin">{{searchCrteria}}</div>
     <div *ngIf="resultsFound">
       <div class="mt-20 labeldiv" *ngFor="let profile of searchResults">

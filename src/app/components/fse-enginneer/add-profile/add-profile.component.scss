@@ -1,5 +1,6 @@
 @use 'fonts';
 @use 'colors';
+@use 'global';
 
 .add-profile { 
   width: 40%;
@@ -33,12 +34,6 @@
 .drop-down {
   padding: 10px;
   width: 50%;
-}
-
-.error-message {
-  width: 100%;
-  display: block;
-  color: red;
 }
 
 .linkclass {
