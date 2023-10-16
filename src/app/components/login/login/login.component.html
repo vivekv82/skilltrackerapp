@@ -6,13 +6,26 @@
   <form novalidate [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
     <div class="mt-20">
       <div class="label-margin">Login ID </div>
-      <div><input type="text" class="text-box-border input-text input-text-padding" formControlName="loginId" /></div>
+      <div><input type="text"
+          [ngClass]="{'validation-error': loginFormGroup.controls['loginId'].touched && loginFormGroup.controls['loginId'].invalid}"
+          class="text-box-border input-text input-text-padding" formControlName="loginId" />
+        <div class="error-message"
+          *ngIf="loginFormGroup.controls['loginId'].touched && loginFormGroup.controls['loginId'].invalid">
+          Enter Login Id.</div>
+      </div>
     </div>
     <div class="mt-20 mb-20">
       <div class="label-margin">Password </div>
-      <div><input type="password" class="text-box-border input-text input-text-padding" formControlName="password" /></div>
+      <div><input type="password"
+          [ngClass]="{'validation-error': loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid}"
+          class="text-box-border input-text input-text-padding" formControlName="password" />
+        <div class="error-message"
+          *ngIf="loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid">
+          Enter Password.</div>
+      </div>
     </div>
 
-    <div class="mt-20 mb-20"><button class="mb-20 button-submit" type="submit">Sign in</button></div>
+    <div class="mt-20 mb-20"><button class="mb-20 button-submit" type="submit" [disabled]="!loginFormGroup.valid">Sign
+        in</button></div>
   </form>
 </div>
