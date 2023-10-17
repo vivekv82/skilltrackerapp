@@ -13,7 +13,7 @@ export class ProfileService {
   }
 
   public addNewProfile(addSkillReq: any) {
-    return this.authHttpService.post("http://ec2-54-159-234-138.compute-1.amazonaws.com:8080/api/v1/engineer/addProfile", addSkillReq);
+    return this.authHttpService.post("https://jh6yj2mj19.execute-api.us-east-1.amazonaws.com/qa/api/v1/engineer/addProfile", addSkillReq);
   }
   
   public updateNewProfile(updateSkillReq: any) {

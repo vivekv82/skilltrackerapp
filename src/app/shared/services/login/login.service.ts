@@ -14,6 +14,6 @@ export class LoginService {
   }
 
   public doLogin(loginData: any) {
-    return this.authHttpService.post('http://localhost:8080/api/v1/login', loginData);
+    return this.authHttpService.post('http://ec2-54-236-70-159.compute-1.amazonaws.com:8080/api/v1/login', loginData);
   }
 }
